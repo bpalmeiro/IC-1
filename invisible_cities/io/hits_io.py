@@ -10,11 +10,14 @@ from .. types.ic_types     import NN
 
 
 # reader
-def load_hits(DST_file_name):
+def load_hits(DST_file_name, max_len=None):
     """Return the Hits as PD DataFrames."""
 
     dst = load_dst(DST_file_name,'RECO','Events')
+    if not max_len is None:
+        dst = dst.head(max_len)
     dst_size = len(dst)
+    print('size: ', dst_size)
     all_events = {}
 
     event = dst.event.values
@@ -39,10 +42,12 @@ def load_hits(DST_file_name):
     return all_events
 
 
-def load_hits_skipping_NN(DST_file_name):
+def load_hits_skipping_NN(DST_file_name, max_len=None):
     """Return the Hits as PD DataFrames."""
 
     dst = load_dst(DST_file_name,'RECO','Events')
+    if not max_len is None:
+        dst = dst.head(max_len)
     dst_size = len(dst)
     all_events = {}
 

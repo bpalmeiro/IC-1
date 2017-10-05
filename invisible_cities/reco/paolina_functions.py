@@ -35,7 +35,8 @@ def voxelize_hits(hits             : Sequence[BHit],
     """1. Hits are enclosed by a bounding box.
        2. Boundix box is discretized (via a hitogramdd).
        3. The energy of all the hits insidex each discreet "voxel" is added.
-     """
+    """
+    print('test')
     if not hits:
         raise NoHits
     hlo, hhi = bounding_box(hits)
@@ -43,7 +44,8 @@ def voxelize_hits(hits             : Sequence[BHit],
     bins = np.ceil(hranges / voxel_dimensions).astype(int)
     nonzero_bins = np.clip(bins, a_min=1, a_max=None)
     hit_positions = np.array([h.pos for h in hits])
-    hit_energies  =          [h.E   for h in hits]
+    hit_energies  =          [h.E[0]   for h in hits]
+
     E, edges = np.histogramdd(hit_positions, bins=nonzero_bins, weights=hit_energies)
 
     def centres(a : np.ndarray) -> np.ndarray:
