@@ -13,8 +13,7 @@ Contents:
 
    contributing
    notebooks
-   core
-
+   usersguide
 
 
 Indices and tables
